@@ -258,16 +258,31 @@ export default function VendasScreen() {
 
       if (paymentsError) throw paymentsError;
 
+      // Atualizar estoque dos produtos
       for (const item of cart) {
         if (item.productId) {
-          const { error: stockError } = await supabase.rpc(
-            'update_product_stock',
-            {
-              p_product_id: item.productId,
-              p_quantity: -item.quantity,
-            }
-          );
-          if (stockError) console.error('Stock update error:', stockError);
+          // Buscar quantidade atual
+          const { data: product, error: fetchError } = await supabase
+            .from('products')
+            .select('stock_quantity')
+            .eq('id', item.productId)
+            .single();
+
+          if (fetchError) {
+            console.error('Error fetching product stock:', fetchError);
+            continue;
+          }
+
+          // Atualizar estoque
+          const newQuantity = (product.stock_quantity || 0) - item.quantity;
+          const { error: stockError } = await supabase
+            .from('products')
+            .update({ stock_quantity: Math.max(0, newQuantity) })
+            .eq('id', item.productId);
+
+          if (stockError) {
+            console.error('Stock update error:', stockError);
+          }
         }
       }
 

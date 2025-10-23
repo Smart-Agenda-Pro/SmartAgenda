@@ -16,6 +16,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
+import Constants from 'expo-constants';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
 import colors from '@/constants/colors';
@@ -157,6 +158,13 @@ export default function DashboardScreen() {
     setAiLoading(true);
 
     try {
+      // Verificar se a API key está configurada
+      const apiKey = Constants.expoConfig?.extra?.groqApiKey || process.env.EXPO_PUBLIC_GROQ_API_KEY;
+      
+      if (!apiKey) {
+        throw new Error('API Key da Groq não configurada. Adicione EXPO_PUBLIC_GROQ_API_KEY no arquivo .env');
+      }
+
       const context = `Você é um assistente de IA para um sistema de barbearia. 
       O usuário tem acesso às seguintes informações:
       - Vendas totais da semana: R$ ${metrics?.totalRevenue.toFixed(2) || '0.00'}
@@ -171,7 +179,7 @@ export default function DashboardScreen() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+          'Authorization': `Bearer ${apiKey}`,
         },
         
         body: JSON.stringify({

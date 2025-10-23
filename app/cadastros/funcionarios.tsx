@@ -78,7 +78,7 @@ export default function FuncionariosScreen() {
       cargo: 'Barbeiro',
       salario: 3200.0,
       ativo: true,
-      dataAdmissao: '2024-03-01',
+      dataAdmissao: '2025-03-01',
     },
   ]);
 

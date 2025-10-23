@@ -3,7 +3,7 @@
 ## Documento de Requisitos e Funcionalidades
 
 **Versão:** 1.0  
-**Data:** Janeiro 2024  
+**Data:** Janeiro 2025  
 **Status:** Em Desenvolvimento Ativo
 
 ---
@@ -1041,7 +1041,7 @@ Login → Dashboard → Gráficos → Seleção de Métricas → Visualização
 
 ## 🔄 Versões e Histórico
 
-### v1.0 - Janeiro 2024
+### v1.0 - Janeiro 2025
 - ✅ Sistema de autenticação
 - ✅ Dashboard com métricas
 - ✅ Agenda de compromissos
@@ -1074,10 +1074,10 @@ Login → Dashboard → Gráficos → Seleção de Métricas → Visualização
 
 **Documento de Requisitos - BarberPro Management**
 
-*Versão 1.0 - Janeiro 2024*
+*Versão 1.0 - Janeiro 2025*
 
 ---
 
-© 2024 BarberPro Management. Todos os direitos reservados.
+© 2025 BarberPro Management. Todos os direitos reservados.
 
 </div>

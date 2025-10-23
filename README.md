@@ -624,7 +624,7 @@ O banco possui views otimizadas para relatórios:
 ```sql
 SELECT * FROM daily_revenue
 WHERE tenant_id = '<tenant_id>'
-  AND sale_date >= '2024-01-01';
+  AND sale_date >= '2025-01-01';
 ```
 Retorna: total_sales, total_revenue, avg_ticket, total_discounts por dia
 

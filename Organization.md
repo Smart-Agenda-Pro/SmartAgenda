@@ -277,26 +277,26 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 🎯 Roadmap da Organização
 
-### Q1 2024
+### Q1 2025
 - [x] Lançamento do MVP
 - [x] Sistema de autenticação
 - [x] Dashboard com métricas
 - [x] Agenda digital
 - [x] Sistema de vendas
 
-### Q2 2024
+### Q2 2025
 - [ ] Aplicativo para clientes
 - [ ] Sistema de notificações push
 - [ ] Integração com WhatsApp
 - [ ] Programa de fidelidade
 
-### Q3 2024
+### Q3 2025
 - [ ] Relatórios avançados
 - [ ] Modo offline
 - [ ] Multi-idiomas
 - [ ] Temas personalizáveis
 
-### Q4 2024
+### Q4 2025
 - [ ] Marketplace de integrações
 - [ ] API pública
 - [ ] Sistema de plugins
@@ -405,6 +405,6 @@ Desenvolvido com ❤️ pela comunidade SmartAgenda
 
 ---
 
-© 2024 SmartAgenda Management. Todos os direitos reservados.
+© 2025 SmartAgenda Management. Todos os direitos reservados.
 
 </div>

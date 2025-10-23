@@ -202,13 +202,13 @@ export default function VendasScreen() {
         throw new Error('Adicione itens ao carrinho');
       }
 
-      const discountValue = parseFloat(discount) || 0;
-      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      const total = subtotal - discountValue;
+      const discountValue = Math.round((parseFloat(discount) || 0) * 100) / 100;
+      const subtotal = Math.round(cart.reduce((sum, item) => sum + item.price * item.quantity, 0) * 100) / 100;
+      const total = Math.round((subtotal - discountValue) * 100) / 100;
       
-      const totalPaid = payments.reduce((sum, p) => sum + p.amount, 0);
+      const totalPaid = Math.round(payments.reduce((sum, p) => sum + p.amount, 0) * 100) / 100;
       if (Math.abs(totalPaid - total) > 0.01) {
-        throw new Error('O valor pago deve ser igual ao total da venda');
+        throw new Error(`O valor pago (R$ ${totalPaid.toFixed(2)}) deve ser igual ao total da venda (R$ ${total.toFixed(2)})`);
       }
 
       const { data: sale, error: saleError } = await supabase
@@ -323,11 +323,13 @@ export default function VendasScreen() {
   };
 
   const addPayment = () => {
-    const amount = parseFloat(paymentAmount);
+    const amount = Math.round((parseFloat(paymentAmount) || 0) * 100) / 100;
     if (isNaN(amount) || amount <= 0) {
       Alert.alert('Erro', 'Digite um valor válido');
       return;
     }
+    
+    console.log('[PDV] Adding payment:', { method: paymentMethod, amount });
     setPayments([...payments, { method: paymentMethod, amount }]);
     setPaymentAmount('');
     setShowPaymentModal(false);
@@ -337,12 +339,12 @@ export default function VendasScreen() {
     setPayments(payments.filter((_, i) => i !== index));
   };
 
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const discountValue = parseFloat(discount) || 0;
+  const subtotal = Math.round(cart.reduce((sum, item) => sum + item.price * item.quantity, 0) * 100) / 100;
+  const discountValue = Math.round((parseFloat(discount) || 0) * 100) / 100;
   const total = Math.round((subtotal - discountValue) * 100) / 100;
   const totalPaid = Math.round(payments.reduce((sum, p) => sum + p.amount, 0) * 100) / 100;
   const remaining = Math.round((total - totalPaid) * 100) / 100;
-  const canFinish = cart.length > 0 && Math.abs(remaining) < 0.01;
+  const canFinish = cart.length > 0 && Math.abs(remaining) <= 0.01;
 
   console.log('[PDV] Values:', { 
     subtotal, 
@@ -766,13 +768,30 @@ export default function VendasScreen() {
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
                 <Text style={styles.sectionTitle}>Pagamentos</Text>
-                <TouchableOpacity
-                  style={styles.addButton}
-                  onPress={() => setShowPaymentModal(true)}
-                >
-                  <Plus size={16} color={colors.surface} />
-                  <Text style={styles.addButtonText}>Adicionar</Text>
-                </TouchableOpacity>
+                <View style={{ flexDirection: 'row', gap: 8 }}>
+                  {remaining > 0 && (
+                    <TouchableOpacity
+                      style={[styles.addButton, { backgroundColor: colors.accent }]}
+                      onPress={() => {
+                        setPaymentAmount(remaining.toFixed(2));
+                        setShowPaymentModal(true);
+                      }}
+                    >
+                      <DollarSign size={16} color={colors.surface} />
+                      <Text style={styles.addButtonText}>R$ {remaining.toFixed(2)}</Text>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity
+                    style={styles.addButton}
+                    onPress={() => {
+                      setPaymentAmount('');
+                      setShowPaymentModal(true);
+                    }}
+                  >
+                    <Plus size={16} color={colors.surface} />
+                    <Text style={styles.addButtonText}>Adicionar</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
               {payments.length === 0 ? (
                 <Text style={styles.emptyCart}>Nenhum pagamento adicionado</Text>
@@ -825,7 +844,6 @@ export default function VendasScreen() {
           <View style={styles.modalFooter}>
             <TouchableOpacity
               style={[styles.finishButton, (!canFinish || createSaleMutation.isPending) && styles.finishButtonDisabled]}
-              disabled={!canFinish || createSaleMutation.isPending}
               activeOpacity={0.7}
               onPress={() => {
                 console.log('[PDV] Button pressed!', { 
@@ -834,12 +852,28 @@ export default function VendasScreen() {
                   cartLength: cart.length,
                   remaining,
                   total,
-                  totalPaid
+                  totalPaid,
+                  paymentsLength: payments.length
                 });
-                if (!canFinish || createSaleMutation.isPending) {
-                  console.log('[PDV] Button blocked!');
+                
+                if (createSaleMutation.isPending) {
+                  console.log('[PDV] Already processing...');
                   return;
                 }
+                
+                if (cart.length === 0) {
+                  Alert.alert('Atenção', 'Adicione itens ao carrinho antes de finalizar a venda');
+                  return;
+                }
+                
+                if (Math.abs(remaining) > 0.01) {
+                  const message = remaining > 0 
+                    ? `Faltam R$ ${remaining.toFixed(2)} para completar o pagamento`
+                    : `Há R$ ${Math.abs(remaining).toFixed(2)} de troco a devolver`;
+                  Alert.alert('Atenção', message);
+                  return;
+                }
+                
                 console.log('[PDV] Calling mutation...');
                 createSaleMutation.mutate();
               }}
@@ -847,7 +881,9 @@ export default function VendasScreen() {
               {createSaleMutation.isPending ? (
                 <ActivityIndicator color={colors.surface} />
               ) : (
-                <Text style={[styles.finishButtonText, (!canFinish || createSaleMutation.isPending) && styles.finishButtonTextDisabled]}>Finalizar Venda</Text>
+                <Text style={[styles.finishButtonText, (!canFinish || createSaleMutation.isPending) && styles.finishButtonTextDisabled]}>
+                  {canFinish ? 'Finalizar Venda' : cart.length === 0 ? 'Adicione itens' : 'Complete o pagamento'}
+                </Text>
               )}
             </TouchableOpacity>
           </View>

@@ -470,8 +470,8 @@ Repita para todos os buckets (`reports`, `logos`, `products`).
 2. Vá em **Authentication** > **Users** > **Add user**
 3. **Método**: Email
 4. Preencha:
-   - **Email**: `admin@demo.com`
-   - **Password**: `Admin123!`
+   - **Email**: `Admin53@gmail.com`
+   - **Password**: `EpKrRd020413`
    - ✅ Marque **Auto Confirm User** (importante!)
 5. Clique em **Create user**
 6. **IMPORTANTE**: Copie o **UUID** do usuário criado (aparece na lista de usuários)

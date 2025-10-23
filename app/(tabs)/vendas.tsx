@@ -323,14 +323,31 @@ export default function VendasScreen() {
   };
 
   const addPayment = () => {
-    const amount = Math.round((parseFloat(paymentAmount) || 0) * 100) / 100;
-    if (isNaN(amount) || amount <= 0) {
-      Alert.alert('Erro', 'Digite um valor válido');
+    console.log('[Payment Modal] addPayment called with:', { 
+      paymentAmount, 
+      paymentMethod,
+      paymentsCount: payments.length 
+    });
+    
+    const trimmedAmount = paymentAmount.trim();
+    if (!trimmedAmount || trimmedAmount === '' || trimmedAmount === '0' || trimmedAmount === '0.00') {
+      Alert.alert('Erro', 'Digite um valor válido maior que zero');
       return;
     }
     
-    console.log('[PDV] Adding payment:', { method: paymentMethod, amount });
-    setPayments([...payments, { method: paymentMethod, amount }]);
+    const amount = Math.round((parseFloat(trimmedAmount) || 0) * 100) / 100;
+    
+    console.log('[Payment Modal] Parsed amount:', amount);
+    
+    if (isNaN(amount) || amount <= 0) {
+      Alert.alert('Erro', 'Digite um valor válido maior que zero');
+      return;
+    }
+    
+    console.log('[Payment Modal] Adding payment:', { method: paymentMethod, amount });
+    const newPayments = [...payments, { method: paymentMethod, amount }];
+    setPayments(newPayments);
+    console.log('[Payment Modal] Payments updated:', newPayments);
     setPaymentAmount('');
     setShowPaymentModal(false);
   };
@@ -894,9 +911,24 @@ export default function VendasScreen() {
         visible={showPaymentModal}
         animationType="fade"
         transparent
+        onRequestClose={() => {
+          setShowPaymentModal(false);
+          setPaymentAmount('');
+        }}
       >
-        <View style={styles.paymentModalOverlay}>
-          <View style={styles.paymentModalContent}>
+        <TouchableOpacity 
+          style={styles.paymentModalOverlay}
+          activeOpacity={1}
+          onPress={() => {
+            setShowPaymentModal(false);
+            setPaymentAmount('');
+          }}
+        >
+          <TouchableOpacity 
+            style={styles.paymentModalContent}
+            activeOpacity={1}
+            onPress={(e) => e.stopPropagation()}
+          >
             <Text style={styles.paymentModalTitle}>Adicionar Pagamento</Text>
             
             <Text style={styles.paymentModalLabel}>Forma de Pagamento</Text>
@@ -908,7 +940,11 @@ export default function VendasScreen() {
                     styles.paymentMethodButton,
                     paymentMethod === method && styles.paymentMethodButtonActive,
                   ]}
-                  onPress={() => setPaymentMethod(method)}
+                  activeOpacity={0.7}
+                  onPress={() => {
+                    console.log('[Payment Modal] Selected method:', method);
+                    setPaymentMethod(method);
+                  }}
                 >
                   <Text
                     style={[
@@ -924,17 +960,29 @@ export default function VendasScreen() {
 
             <Text style={styles.paymentModalLabel}>Valor</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { fontSize: 18, fontWeight: '600' }]}
               placeholder="0.00"
+              placeholderTextColor={colors.textLight}
               value={paymentAmount}
-              onChangeText={setPaymentAmount}
+              onChangeText={(text) => {
+                console.log('[Payment Modal] Amount changed:', text);
+                setPaymentAmount(text);
+              }}
               keyboardType="decimal-pad"
+              autoFocus
+              returnKeyType="done"
+              onSubmitEditing={() => {
+                console.log('[Payment Modal] Submit editing');
+                addPayment();
+              }}
             />
 
             <View style={styles.paymentModalButtons}>
               <TouchableOpacity
                 style={[styles.paymentModalButton, styles.paymentModalButtonCancel]}
+                activeOpacity={0.7}
                 onPress={() => {
+                  console.log('[Payment Modal] Cancelled');
                   setShowPaymentModal(false);
                   setPaymentAmount('');
                 }}
@@ -943,13 +991,17 @@ export default function VendasScreen() {
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.paymentModalButton, styles.paymentModalButtonConfirm]}
-                onPress={addPayment}
+                activeOpacity={0.7}
+                onPress={() => {
+                  console.log('[Payment Modal] Add button pressed');
+                  addPayment();
+                }}
               >
                 <Text style={styles.paymentModalButtonTextConfirm}>Adicionar</Text>
               </TouchableOpacity>
             </View>
-          </View>
-        </View>
+          </TouchableOpacity>
+        </TouchableOpacity>
       </Modal>
     </SafeAreaView>
   );
@@ -1509,17 +1561,22 @@ const styles = StyleSheet.create({
   },
   paymentModalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
   paymentModalContent: {
     backgroundColor: colors.surface,
-    borderRadius: 12,
-    padding: 20,
+    borderRadius: 16,
+    padding: 24,
     width: '100%',
     maxWidth: 400,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 10,
   },
   paymentModalTitle: {
     fontSize: 20,
@@ -1541,12 +1598,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   paymentMethodButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 6,
-    borderWidth: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 8,
+    borderWidth: 2,
     borderColor: colors.border,
-    backgroundColor: colors.surface,
+    backgroundColor: colors.background,
   },
   paymentMethodButtonActive: {
     backgroundColor: colors.primary,
@@ -1559,27 +1616,37 @@ const styles = StyleSheet.create({
   },
   paymentMethodButtonTextActive: {
     color: colors.surface,
+    fontWeight: '700' as const,
   },
   paymentModalButtons: {
     flexDirection: 'row',
     gap: 12,
-    marginTop: 20,
+    marginTop: 24,
   },
   paymentModalButton: {
     flex: 1,
-    padding: 12,
-    borderRadius: 8,
+    padding: 16,
+    borderRadius: 10,
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 50,
   },
   paymentModalButtonCancel: {
     backgroundColor: colors.borderLight,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   paymentModalButtonConfirm: {
     backgroundColor: colors.secondary,
+    shadowColor: colors.secondary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
   },
   paymentModalButtonTextCancel: {
     fontSize: 16,
-    fontWeight: '600' as const,
+    fontWeight: '700' as const,
     color: colors.text,
   },
   paymentModalButtonTextConfirm: {

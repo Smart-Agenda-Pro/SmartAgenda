@@ -55,7 +55,6 @@ export default function VendasScreen() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [discount, setDiscount] = useState('0');
   const [payments, setPayments] = useState<PaymentEntry[]>([]);
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('cash');
   const [paymentAmount, setPaymentAmount] = useState('');
 
@@ -325,45 +324,28 @@ export default function VendasScreen() {
 
   const addPayment = () => {
     console.log('========================================');
-    console.log('[Payment Modal] ⚡ addPayment FUNCTION CALLED');
-    console.log('[Payment Modal] Input values:', { 
-      paymentAmount, 
-      paymentMethod,
-      paymentsCount: payments.length 
-    });
+    console.log('[Payment] ⚡ addPayment CALLED');
+    console.log('[Payment] Values:', { paymentAmount, paymentMethod });
     
     const trimmedAmount = paymentAmount.trim();
-    console.log('[Payment Modal] Trimmed amount:', trimmedAmount);
     
     if (!trimmedAmount || trimmedAmount === '' || trimmedAmount === '0' || trimmedAmount === '0.00') {
-      console.log('[Payment Modal] ❌ Validation failed - empty or zero');
       Alert.alert('Erro', 'Digite um valor válido maior que zero');
       return;
     }
     
     const amount = Math.round((parseFloat(trimmedAmount) || 0) * 100) / 100;
-    console.log('[Payment Modal] Parsed amount:', amount);
     
     if (isNaN(amount) || amount <= 0) {
-      console.log('[Payment Modal] ❌ Validation failed - invalid number');
       Alert.alert('Erro', 'Digite um valor válido maior que zero');
       return;
     }
     
-    console.log('[Payment Modal] ✅ Validation passed');
-    console.log('[Payment Modal] Creating payment:', { method: paymentMethod, amount });
-    
+    console.log('[Payment] ✅ Adding:', { method: paymentMethod, amount });
     const newPayments = [...payments, { method: paymentMethod, amount }];
-    console.log('[Payment Modal] New payments array:', newPayments);
-    
     setPayments(newPayments);
-    console.log('[Payment Modal] ✅ setPayments called');
-    
     setPaymentAmount('');
-    console.log('[Payment Modal] ✅ setPaymentAmount cleared');
-    
-    setShowPaymentModal(false);
-    console.log('[Payment Modal] ✅ Modal closing');
+    console.log('[Payment] ✅ Success! Total payments:', newPayments.length);
     console.log('========================================');
   };
 
@@ -798,35 +780,78 @@ export default function VendasScreen() {
             </View>
 
             <View style={styles.section}>
-              <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Pagamentos</Text>
-                <View style={{ flexDirection: 'row', gap: 8 }}>
-                  {remaining > 0 && (
+              <Text style={styles.sectionTitle}>Pagamentos</Text>
+              
+              {/* Formulário de Adicionar Pagamento - Sempre Visível */}
+              <View style={styles.paymentForm}>
+                <Text style={styles.paymentFormLabel}>Forma de Pagamento</Text>
+                <View style={styles.paymentMethods}>
+                  {(['cash', 'credit_card', 'debit_card', 'pix'] as PaymentMethod[]).map(method => (
                     <TouchableOpacity
-                      style={[styles.addButton, { backgroundColor: colors.accent }]}
+                      key={method}
+                      style={[
+                        styles.paymentMethodButton,
+                        paymentMethod === method && styles.paymentMethodButtonActive,
+                      ]}
+                      activeOpacity={0.7}
                       onPress={() => {
-                        setPaymentAmount(remaining.toFixed(2));
-                        setShowPaymentModal(true);
+                        console.log('[Payment] Method selected:', method);
+                        setPaymentMethod(method);
                       }}
                     >
-                      <DollarSign size={16} color={colors.surface} />
+                      <Text
+                        style={[
+                          styles.paymentMethodButtonText,
+                          paymentMethod === method && styles.paymentMethodButtonTextActive,
+                        ]}
+                      >
+                        {getPaymentMethodLabel(method)}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+
+                <Text style={styles.paymentFormLabel}>Valor</Text>
+                <View style={{ flexDirection: 'row', gap: 8 }}>
+                  <TextInput
+                    style={[styles.input, { flex: 1, fontSize: 16 }]}
+                    placeholder="0.00"
+                    placeholderTextColor={colors.textLight}
+                    value={paymentAmount}
+                    onChangeText={(text) => {
+                      console.log('[Payment] Amount changed:', text);
+                      setPaymentAmount(text);
+                    }}
+                    keyboardType="decimal-pad"
+                    returnKeyType="done"
+                  />
+                  {remaining > 0 && (
+                    <TouchableOpacity
+                      style={[styles.addButton, { backgroundColor: colors.accent, paddingHorizontal: 12 }]}
+                      onPress={() => {
+                        console.log('[Payment] Quick fill:', remaining.toFixed(2));
+                        setPaymentAmount(remaining.toFixed(2));
+                      }}
+                    >
                       <Text style={styles.addButtonText}>R$ {remaining.toFixed(2)}</Text>
                     </TouchableOpacity>
                   )}
                   <TouchableOpacity
-                    style={styles.addButton}
+                    style={[styles.addButton, { paddingHorizontal: 20 }]}
+                    activeOpacity={0.7}
                     onPress={() => {
-                      setPaymentAmount('');
-                      setShowPaymentModal(true);
+                      console.log('[Payment] Add button pressed directly');
+                      addPayment();
                     }}
                   >
-                    <Plus size={16} color={colors.surface} />
-                    <Text style={styles.addButtonText}>Adicionar</Text>
+                    <Plus size={18} color={colors.surface} strokeWidth={2.5} />
                   </TouchableOpacity>
                 </View>
               </View>
+
+              {/* Lista de Pagamentos Adicionados */}
               {payments.length === 0 ? (
-                <Text style={styles.emptyCart}>Nenhum pagamento adicionado</Text>
+                <Text style={styles.emptyCart}>Nenhum pagamento adicionado ainda</Text>
               ) : (
                 <View style={styles.paymentsList}>
                   {payments.map((payment, index) => (
@@ -920,108 +945,6 @@ export default function VendasScreen() {
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      </Modal>
-
-      <Modal
-        visible={showPaymentModal}
-        animationType="fade"
-        transparent
-        onRequestClose={() => {
-          setShowPaymentModal(false);
-          setPaymentAmount('');
-        }}
-      >
-        <KeyboardAvoidingView 
-          style={{ flex: 1 }}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
-          <Pressable 
-            style={styles.paymentModalOverlay}
-            onPress={() => {
-              console.log('[Payment Modal] Overlay pressed - closing');
-              setShowPaymentModal(false);
-              setPaymentAmount('');
-            }}
-          >
-            <View 
-              style={styles.paymentModalContent}
-              onStartShouldSetResponder={() => true}
-              onTouchEnd={(e) => e.stopPropagation()}
-            >
-              <Text style={styles.paymentModalTitle}>Adicionar Pagamento</Text>
-              
-              <Text style={styles.paymentModalLabel}>Forma de Pagamento</Text>
-              <View style={styles.paymentMethods}>
-                {(['cash', 'credit_card', 'debit_card', 'pix'] as PaymentMethod[]).map(method => (
-                  <TouchableOpacity
-                    key={method}
-                    style={[
-                      styles.paymentMethodButton,
-                      paymentMethod === method && styles.paymentMethodButtonActive,
-                    ]}
-                    activeOpacity={0.7}
-                    onPress={() => {
-                      console.log('[Payment Modal] Selected method:', method);
-                      setPaymentMethod(method);
-                    }}
-                  >
-                    <Text
-                      style={[
-                        styles.paymentMethodButtonText,
-                        paymentMethod === method && styles.paymentMethodButtonTextActive,
-                      ]}
-                    >
-                      {getPaymentMethodLabel(method)}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-
-              <Text style={styles.paymentModalLabel}>Valor</Text>
-              <TextInput
-                style={[styles.input, { fontSize: 18, fontWeight: '600' }]}
-                placeholder="0.00"
-                placeholderTextColor={colors.textLight}
-                value={paymentAmount}
-                onChangeText={(text) => {
-                  console.log('[Payment Modal] Amount changed:', text);
-                  setPaymentAmount(text);
-                }}
-                keyboardType="decimal-pad"
-                autoFocus
-                returnKeyType="done"
-                onSubmitEditing={() => {
-                  console.log('[Payment Modal] Submit editing - calling addPayment');
-                  addPayment();
-                }}
-              />
-
-              <View style={styles.paymentModalButtons}>
-                <TouchableOpacity
-                  style={[styles.paymentModalButton, styles.paymentModalButtonCancel]}
-                  activeOpacity={0.7}
-                  onPress={() => {
-                    console.log('[Payment Modal] Cancel pressed');
-                    setShowPaymentModal(false);
-                    setPaymentAmount('');
-                  }}
-                >
-                  <Text style={styles.paymentModalButtonTextCancel}>Cancelar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.paymentModalButton, styles.paymentModalButtonConfirm]}
-                  activeOpacity={0.7}
-                  onPress={() => {
-                    console.log('[Payment Modal] Add button PRESSED - calling addPayment');
-                    addPayment();
-                  }}
-                >
-                  <Text style={styles.paymentModalButtonTextConfirm}>Adicionar</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Pressable>
-        </KeyboardAvoidingView>
       </Modal>
     </SafeAreaView>
   );
@@ -1579,34 +1502,15 @@ const styles = StyleSheet.create({
   finishButtonTextDisabled: {
     color: colors.textSecondary,
   },
-  paymentModalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
+  paymentForm: {
+    backgroundColor: colors.background,
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: colors.border,
+    marginBottom: 12,
   },
-  paymentModalContent: {
-    backgroundColor: colors.surface,
-    borderRadius: 16,
-    padding: 24,
-    width: '100%',
-    maxWidth: 400,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 10,
-    zIndex: 1000,
-  },
-  paymentModalTitle: {
-    fontSize: 20,
-    fontWeight: '700' as const,
-    color: colors.text,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  paymentModalLabel: {
+  paymentFormLabel: {
     fontSize: 14,
     fontWeight: '600' as const,
     color: colors.text,
@@ -1624,7 +1528,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 2,
     borderColor: colors.border,
-    backgroundColor: colors.background,
+    backgroundColor: colors.surface,
   },
   paymentMethodButtonActive: {
     backgroundColor: colors.primary,
@@ -1638,42 +1542,5 @@ const styles = StyleSheet.create({
   paymentMethodButtonTextActive: {
     color: colors.surface,
     fontWeight: '700' as const,
-  },
-  paymentModalButtons: {
-    flexDirection: 'row',
-    gap: 12,
-    marginTop: 24,
-    zIndex: 1001,
-  },
-  paymentModalButton: {
-    flex: 1,
-    padding: 16,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 50,
-  },
-  paymentModalButtonCancel: {
-    backgroundColor: colors.borderLight,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-  paymentModalButtonConfirm: {
-    backgroundColor: colors.secondary,
-    shadowColor: colors.secondary,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  paymentModalButtonTextCancel: {
-    fontSize: 16,
-    fontWeight: '700' as const,
-    color: colors.text,
-  },
-  paymentModalButtonTextConfirm: {
-    fontSize: 16,
-    fontWeight: '700' as const,
-    color: colors.surface,
   },
 });

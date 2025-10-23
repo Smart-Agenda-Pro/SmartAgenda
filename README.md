@@ -2,7 +2,7 @@
 
 ![SmartAgenda Management](assets/images/icon.png)
 
-# � SmartAgenda - Sistema de Gestão para Barbearias
+# 💈 SmartAgenda - Sistema de Gestão para Barbearias
 
 **Solução Completa e Inteligente para Gestão de Barbearias**
 
@@ -10,7 +10,7 @@
 [![Expo](https://img.shields.io/badge/Expo-53-000020?style=flat&logo=expo&logoColor=white)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat&logo=supabase&logoColor=white)](https://supabase.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 
 [Funcionalidades](#-funcionalidades) • [Screenshots](#-screenshots-da-aplicação) • [Instalação](#-instalação) • [Documentação](#-configuração-do-supabase) • [Deploy](#-deploy)
 
@@ -809,10 +809,10 @@ eas secret:create --scope project --name GROQ_API_KEY --value sua_chave
 ## ❓ FAQ (Perguntas Frequentes)
 
 ### **P: O SmartAgenda é gratuito?**
-**R**: Sim, o código-fonte é open-source sob licença MIT. Porém, você precisará de uma conta Supabase (gratuita até certo limite) e Groq (também gratuita) para rodar.
+**R**: O SmartAgenda é um software proprietário da SmartAgenda. Para uso comercial é necessário obter uma licença. Entre em contato para mais informações sobre planos e preços. Para demonstração ou avaliação, consulte nossa equipe de vendas.
 
 ### **P: Posso usar para múltiplas barbearias?**
-**R**: Sim! O sistema é multi-tenant. Cada barbearia é um tenant separado com isolamento total de dados.
+**R**: Sim! O sistema é multi-tenant e suporta múltiplas unidades. Cada barbearia é um tenant separado com isolamento total de dados. Consulte nossos planos para licenciamento de múltiplas unidades.
 
 ### **P: Funciona offline?**
 **R**: Atualmente não, mas está no roadmap. O app requer conexão com internet para sincronizar com o Supabase.
@@ -827,47 +827,56 @@ eas secret:create --scope project --name GROQ_API_KEY --value sua_chave
 **R**: Atualmente registra vendas com múltiplos métodos (Dinheiro, Cartão, PIX, etc.). Integração com gateways de pagamento está planejada.
 
 ### **P: Posso contribuir com o projeto?**
-**R**: Absolutamente! Pull requests são bem-vindos. Veja a seção [Contribuindo](#-contribuindo) abaixo.
+**R**: Este é um software proprietário. Contribuições externas não são aceitas no momento. Se você identificou um bug ou tem sugestões de melhorias, entre em contato com nosso suporte técnico.
+
+### **P: Posso modificar o código-fonte?**
+**R**: Não. Modificações, engenharia reversa, descompilação ou qualquer alteração no código são estritamente proibidas nos termos da licença proprietária. Para customizações, consulte nossos planos empresariais.
 
 ---
 
-## 🤝 Contribuindo
+## 📞 Suporte e Contato Comercial
 
-Contribuições são muito bem-vindas! Para contribuir:
+### 💼 Vendas e Licenciamento
+Interessado em usar o SmartAgenda na sua barbearia ou rede de barbearias?
 
-1. **Fork** o repositório
-2. Crie uma **branch** para sua feature (`git checkout -b feature/MinhaFeature`)
-3. **Commit** suas mudanças (`git commit -m 'Adiciona nova feature'`)
-4. **Push** para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um **Pull Request**
+- 📧 **Email Comercial**: vendas@smartagenda.com.br
+- 📞 **Telefone**: +55 (11) 9999-9999
+- 💬 **WhatsApp Business**: [Clique aqui](https://wa.me/5511999999999)
+- 🌐 **Website**: www.smartagenda.com.br
 
-### Diretrizes
-- Siga o estilo de código existente (TypeScript + ESLint)
-- Adicione testes quando aplicável
-- Documente novas funcionalidades
-- Mantenha commits atômicos e descritivos
+### 🛠️ Suporte Técnico
+Já é cliente e precisa de ajuda?
+
+- 📧 **Email Suporte**: suporte@smartagenda.com.br
+- 📚 **Central de Ajuda**: help.smartagenda.com.br
+- 🎫 **Abrir Ticket**: [Portal do Cliente](https://portal.smartagenda.com.br)
+
+### 📚 Recursos para Desenvolvedores
+
+Para entender melhor a arquitetura e configuração:
+
+- 📖 **Este README**: Documentação completa do sistema
+- 🗄️ **Schema SQL**: Consulte `database/schema.sql` para o modelo de dados
+- 📚 **Documentação Supabase**: [supabase.com/docs](https://supabase.com/docs)
+- 📱 **Documentação Expo**: [docs.expo.dev](https://docs.expo.dev/)
 
 ---
 
 ## 📄 Licença
 
-Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está sob **Licença Proprietária** da SmartAgenda. Todos os direitos reservados.
+
+**⚠️ IMPORTANTE**: Este é um software proprietário. O uso, cópia, modificação ou distribuição não autorizados são estritamente proibidos e podem resultar em ações legais.
+
+Para questões sobre licenciamento comercial, permissões especiais ou uso autorizado, entre em contato:
+- 📧 Email: contato@smartagenda.com.br
+- 🌐 Website: www.smartagenda.com.br
+
+Veja o arquivo [LICENSE](LICENSE) para os termos completos e condições de uso.
 
 ---
 
-## 📞 Suporte
-
-Precisa de ajuda? Aqui estão alguns recursos:
-
-- 📖 **Documentação**: Leia este README e os comentários no código
-- 🗄️ **Schema SQL**: Consulte `database/schema.sql` para entender o modelo de dados
-- 📚 **Documentação Supabase**: [supabase.com/docs](https://supabase.com/docs)
-- 📱 **Documentação Expo**: [docs.expo.dev](https://docs.expo.dev/)
-- 💬 **Issues**: Abra uma [issue no GitHub](../../issues) para reportar bugs ou sugerir features
-
----
-
-## 🙏 Agradecimentos
+## � Agradecimentos e Tecnologias
 
 Este projeto foi construído com tecnologias incríveis:
 
@@ -883,15 +892,23 @@ Este projeto foi construído com tecnologias incríveis:
 
 <div align="center">
 
-**Desenvolvido com ❤️ para a comunidade de barbeiros**
+### 💼 Entre em Contato
 
-⭐ **Se este projeto foi útil, considere dar uma estrela!** ⭐
+Interessado no SmartAgenda? Vamos conversar!
 
-[![GitHub stars](https://img.shields.io/github/stars/Smart-Agenda-Pro/SmartAgenda?style=social)](https://github.com/Smart-Agenda-Pro/SmartAgenda/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Smart-Agenda-Pro/SmartAgenda?style=social)](https://github.com/Smart-Agenda-Pro/SmartAgenda/network/members)
+📧 **comercial@smartagenda.com.br** | 📞 **+55 (11) 9999-9999** | 🌐 **www.smartagenda.com.br**
 
 ---
 
-**© 2025 SmartAgenda | Transformando a gestão de barbearias** 💈
+**© 2025 SmartAgenda - Todos os direitos reservados** 💈
+
+**Software Proprietário | Licença Comercial Necessária**
+
+Transformando a gestão de barbearias com tecnologia e inovação
+
+---
+
+⚠️ **AVISO LEGAL**: Este software é protegido por direitos autorais e leis de propriedade intelectual.  
+Uso não autorizado, cópia, modificação ou distribuição são estritamente proibidos.
 
 </div>

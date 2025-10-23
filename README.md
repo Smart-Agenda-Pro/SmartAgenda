@@ -2,16 +2,21 @@
 
 ![SmartAgenda Management](assets/images/icon.png)
 
-# 📱 Barbearia Pro - Sistema de Gestão Completo
+# � SmartAgenda - Sistema de Gestão para Barbearias
 
-**Sistema Completo de Gestão para Barbearias**
+**Solução Completa e Inteligente para Gestão de Barbearias**
 
 [![React Native](https://img.shields.io/badge/React%20Native-0.79-61DAFB?style=flat&logo=react&logoColor=white)](https://reactnative.dev/)
 [![Expo](https://img.shields.io/badge/Expo-53-000020?style=flat&logo=expo&logoColor=white)](https://expo.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat&logo=supabase&logoColor=white)](https://supabase.com/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[Funcionalidades](#-funcionalidades) • [Screenshots](#-screenshots-da-aplicação) • [Instalação](#-instalação) • [Documentação](#-configuração-do-supabase) • [Deploy](#-deploy)
 
 </div>
+
+---
 
 ## 📋 Índice
 - [Visão Geral](#visão-geral)
@@ -29,22 +34,36 @@
 
 ## 🎯 Visão Geral
 
-Sistema completo de gestão para barbearias desenvolvido com **React Native/Expo**, integrando:
-- ✅ Autenticação e autorização com RLS
-- ✅ Agenda digital de compromissos
-- ✅ Sistema de vendas (PDV)
-- ✅ Controle de estoque
-- ✅ Dashboard com métricas em tempo real
-- ✅ Multi-tenant com isolamento de dados
-- ✅ Design moderno inspirado em iOS, Instagram e Airbnb
+O **SmartAgenda** é um sistema completo e moderno de gestão para barbearias, desenvolvido com as melhores tecnologias do mercado. Oferece uma experiência mobile nativa com design inspirado nos melhores aplicativos do mercado (iOS, Instagram, Airbnb), proporcionando uma interface intuitiva e elegante.
+
+### 🌟 Diferenciais
+
+- **🤖 Assistente IA Integrado**: Chatbot inteligente para auxiliar nas operações diárias
+- **📊 Dashboard Inteligente**: Visualização clara de métricas e KPIs em tempo real
+- **🔒 Segurança Avançada**: Row Level Security (RLS) e autenticação JWT
+- **📱 Multi-plataforma**: iOS, Android e Web
+- **☁️ 100% Cloud**: Dados sincronizados em tempo real com Supabase
+- **🎨 Design Moderno**: Interface intuitiva e responsiva
+
+### ✅ Principais Recursos
+
+- ✅ **Autenticação e Autorização** com múltiplos níveis de acesso (Admin, Barbeiro, Atendente)
+- ✅ **Agenda Digital** com visualização diária e gestão de status de compromissos
+- ✅ **Sistema de Vendas (PDV)** completo para serviços e produtos
+- ✅ **Controle de Estoque** automático com alertas de produtos em falta
+- ✅ **Dashboard Analytics** com métricas em tempo real (faturamento, ticket médio, atendimentos)
+- ✅ **Multi-tenant** com isolamento total de dados por barbearia
+- ✅ **Gestão de Clientes** com histórico completo de atendimentos
+- ✅ **Relatórios Financeiros** detalhados e exportáveis
+- ✅ **Design Responsivo** adaptado para tablets e smartphones
 
 **Tecnologias:**
-- React Native 0.79 + Expo 53
-- Supabase (PostgreSQL + Auth + Storage + RLS)
-- TypeScript
-- React Query (TanStack Query)
-- date-fns para manipulação de datas
-- lucide-react-native para ícones
+- **Frontend**: React Native 0.79 + Expo 53 + TypeScript
+- **Backend**: Supabase (PostgreSQL + Auth + Storage + Real-time)
+- **State Management**: React Query (TanStack Query)
+- **Utilitários**: date-fns, lucide-react-native
+- **Segurança**: Row Level Security (RLS) + JWT
+- **IA**: Integração com Groq AI para assistente virtual
 
 ---
 
@@ -89,70 +108,274 @@ Veja `database/schema.sql` para o schema completo com:
 
 ## ✨ Funcionalidades
 
-### 1. Autenticação e Segurança
-- Login por email/senha
-- Recuperação de senha
-- Sessão persistente com refresh token
-- Row Level Security (RLS) por tenant
-- 3 níveis de acesso: Admin, Barbeiro, Atendente
+### 1. 🔐 Autenticação e Segurança
+- **Login Seguro** por email/senha com validação robusta
+- **Recuperação de Senha** via email
+- **Sessão Persistente** com refresh token automático
+- **Row Level Security (RLS)** - isolamento total de dados por tenant
+- **3 Níveis de Acesso**:
+  - 👑 **Admin**: Acesso total ao sistema
+  - ✂️ **Barbeiro**: Agenda própria e vendas
+  - 📋 **Atendente**: Gestão de agenda e vendas
 
-### 2. Dashboard
-- **KPIs da semana atual:**
-  - Faturamento total
-  - Atendimentos concluídos/totais
+### 2. 📊 Dashboard Inteligente
+- **Métricas da Semana em Tempo Real**:
+  - 💰 Faturamento total
+  - ✂️ Atendimentos concluídos/totais
+  - 💵 Ticket médio
+  - 👥 Total de clientes ativos
+- **Gráficos Visuais** para análise rápida
+- **Cards Coloridos** com informações destacadas
+- **Pull-to-Refresh** para atualização instantânea
+- **🤖 Assistente IA** integrado para insights e sugestões
+
+### 3. 📅 Agenda Digital Avançada
+- **Visualização Diária** com navegação intuitiva
+- **Lista de Compromissos** organizada por horário
+- **Status Coloridos** para fácil identificação:
+  - 🔵 Agendado
+  - 🟢 Confirmado
+  - 🟡 Em andamento
+  - ✅ Concluído
+  - 🔴 Cancelado
+  - ⚫ Faltou (No-show)
+- **Filtros por Barbeiro** (em desenvolvimento)
+- **Indicador de "Hoje"** destacado
+- **FAB (+)** para novo agendamento rápido
+- **Validação de Conflitos** automática
+
+### 4. 💰 Sistema de Vendas (PDV)
+- **Histórico Completo** de vendas mensais
+- **Cards de Resumo**:
+  - Total do mês
+  - Número de vendas
   - Ticket médio
-  - Total de clientes
-- Cartões coloridos e intuitivos
-- Pull-to-refresh
-
-### 3. Agenda Digital
-- Visualização diária com navegação
-- Lista de compromissos com status coloridos
-- Filtros por barbeiro (futuro)
-- Indicador de "Hoje"
-- FAB para novo agendamento
-- **Status:**
-  - Agendado (azul)
-  - Confirmado (verde)
-  - Em andamento (amarelo)
-  - Concluído (verde)
-  - Cancelado (vermelho)
-  - Faltou (cinza)
-
-### 4. Vendas
-- Histórico mensal de vendas
-- Cards de resumo (total do mês, nº de vendas)
-- Detalhes de cada venda:
-  - Itens vendidos (serviços/produtos)
-  - Métodos de pagamento
+- **Detalhes de Cada Venda**:
+  - Itens vendidos (serviços + produtos)
+  - Múltiplos métodos de pagamento
   - Descontos aplicados
-- Pull-to-refresh
-- FAB para nova venda
+  - Cliente associado
+- **PDV Intuitivo** para nova venda
+- **Geração de Recibos** (futuro)
 
-### 5. Cadastros
-- Menu com navegação para:
-  - Clientes
-  - Serviços
-  - Produtos
-- Design com cards e ícones coloridos
+### 5. 👥 Gestão de Clientes
+- **Cadastro Completo** com dados pessoais e contato
+- **Histórico de Atendimentos** por cliente
+- **Preferências e Observações**
+- **Busca e Filtros** avançados
+- **Perfil Detalhado** com estatísticas
 
-### 6. Multi-tenant
-- Cada barbearia é um tenant
-- Isolamento total de dados via RLS
-- Configurações por tenant (horários, durações, etc.)
+### 6. 💈 Gerenciamento de Serviços e Produtos
+- **Catálogo de Serviços** personalizável
+- **Controle de Produtos** com estoque
+- **Precificação Flexível**
+- **Categorização** para melhor organização
+- **Fotos de Produtos** (integração com Storage)
+
+### 7. 📊 Relatórios e Análises
+- **Relatórios Financeiros**:
+  - Faturamento diário, semanal, mensal
+  - Performance por barbeiro
+  - Serviços mais vendidos
+  - Análise de produtos
+- **Exportação** em CSV/PDF (futuro)
+- **Gráficos Interativos** (linha, barra, pizza)
+
+### 8. 🏢 Multi-tenant (Multi-loja)
+- Cada barbearia é um **tenant independente**
+- **Isolamento Total** de dados via RLS
+- **Configurações Personalizadas** por tenant:
+  - Horários de funcionamento
+  - Duração padrão de serviços
+  - Logo e identidade visual
+- **Escalabilidade** para múltiplas unidades
 
 ---
 
 ## 📦 Requisitos
 
-- Node.js 18+
-- Bun (gerenciador de pacotes)
-- Expo Go app (para testar em dispositivo)
-- Conta no Supabase (gratuita)
+### Pré-requisitos
+
+- **Node.js** 18+ ([Download](https://nodejs.org/))
+- **Bun** - Gerenciador de pacotes rápido ([Instalação](https://bun.sh/))
+- **Expo Go** - App para testar em dispositivo físico:
+  - [iOS App Store](https://apps.apple.com/app/expo-go/id982107779)
+  - [Android Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
+- **Conta Supabase** - Banco de dados e autenticação (gratuita: [supabase.com](https://supabase.com/))
+- **Conta Groq** (opcional) - Para assistente IA ([console.groq.com](https://console.groq.com/))
+
+### Ferramentas Recomendadas
+
+- **VS Code** com extensões:
+  - React Native Tools
+  - TypeScript
+  - ESLint
+  - Prettier
+- **Expo CLI** global: `npm install -g expo-cli eas-cli`
 
 ---
 
-## 🚀 Instalação
+## � Screenshots da Aplicação
+
+### 🏠 Telas Principais
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="assets/screens/home.png" alt="Dashboard Principal" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Dashboard Principal</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/graficos.png" alt="Gráficos e Análises" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Gráficos e Análises</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/ia.png" alt="Assistente IA" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Assistente IA</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 🔐 Autenticação
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="assets/screens/login.png" alt="Tela de Login" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Login Seguro</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/esqueceu_senha.png" alt="Recuperação de Senha" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Recuperação de Senha</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/perfil.png" alt="Perfil do Usuário" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Perfil do Usuário</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 📅 Agenda e Compromissos
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="assets/screens/agenda.png" alt="Agenda Diária" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Agenda Diária</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/agenda_de_compromisso.png" alt="Lista de Compromissos" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Lista de Compromissos</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/novo_agendamento.png" alt="Novo Agendamento" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Novo Agendamento</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 💰 Vendas e Financeiro
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="assets/screens/vendas.png" alt="Histórico de Vendas" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Histórico de Vendas</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/nova_venda.png" alt="Nova Venda - PDV" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Nova Venda - PDV</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/relatorio.png" alt="Relatórios" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Relatórios</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 👥 Cadastros e Gestão
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="assets/screens/cadastros.png" alt="Menu de Cadastros" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Menu de Cadastros</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/tot_clientes.png" alt="Total de Clientes" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Gestão de Clientes</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/novo_cliente.png" alt="Novo Cliente" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Cadastro de Cliente</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 💈 Serviços e Produtos
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img src="assets/screens/gerenciamento_sevicos.png" alt="Gerenciar Serviços" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Gerenciar Serviços</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/novo_servico.png" alt="Novo Serviço" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Cadastro de Serviço</strong>
+      </td>
+      <td align="center">
+        <img src="assets/screens/hamburguer.png" alt="Menu de Navegação" width="200" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+        <br />
+        <strong>Menu de Navegação</strong>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### 📊 Resumo das Funcionalidades
+
+| Categoria | Funcionalidades | Número de Telas |
+|-----------|-----------------|-----------------|
+| 🏠 **Dashboard** | Visão geral, Gráficos, IA | 3 |
+| 🔐 **Autenticação** | Login, Recuperação, Perfil | 3 |
+| 📅 **Agenda** | Visualização, Lista, Novo agendamento | 3 |
+| 💰 **Vendas** | Histórico, PDV, Relatórios | 3 |
+| 👥 **Clientes** | Menu, Gestão, Cadastro | 3 |
+| 💈 **Serviços** | Gerenciamento, Cadastro, Menu | 3 |
+| **Total** |  | **18 telas** |
+
+---
+
+## �🚀 Instalação
 
 ### 1. Clone e instale dependências
 ```bash
@@ -161,12 +384,33 @@ bun install
 ```
 
 ### 2. Configure variáveis de ambiente
-O projeto já está configurado com as credenciais do Supabase fornecidas em `lib/supabase.ts`:
+
+#### Supabase
+O projeto já está configurado com as credenciais do Supabase em `lib/supabase.ts`:
 
 ```typescript
 const supabaseUrl = 'https://icseawozzuwkkicsmqnf.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
 ```
+
+#### Groq AI (Assistente Inteligente)
+Para habilitar o assistente IA, você precisa configurar a chave da API Groq:
+
+1. **Crie uma conta gratuita** em [console.groq.com](https://console.groq.com/)
+2. **Gere uma API Key** no dashboard
+3. **Crie um arquivo `.env`** na raiz do projeto:
+
+```env
+GROQ_API_KEY=sua_chave_aqui
+```
+
+4. **Para builds EAS**, configure a variável de ambiente:
+
+```bash
+eas secret:create --scope project --name GROQ_API_KEY --value sua_chave_aqui
+```
+
+> **Nota**: O arquivo `.env` está no `.gitignore` para proteger suas credenciais.
 
 ---
 
@@ -456,47 +700,198 @@ Senha: Admin123!
 
 ---
 
-## 📝 Próximos Passos
+## 📝 Próximos Passos e Roadmap
 
-Features planejadas:
-- [ ] CRUD completo de Clientes, Serviços, Produtos
-- [ ] PDV completo com carrinho
-- [ ] Relatórios exportáveis (CSV/PDF)
-- [ ] Gráficos de faturamento (Linhas, Barras, Pizza)
-- [ ] Envio de lembretes por email
-- [ ] Notificações push
-- [ ] Calendário semanal na Agenda
-- [ ] Busca e filtros avançados
-- [ ] Perfil de cliente com histórico
-- [ ] Comissões de barbeiros
-- [ ] App para clientes (agendamento online)
+### 🚀 Em Desenvolvimento
+- [ ] **CRUD Completo** de Clientes, Serviços e Produtos
+- [ ] **PDV Completo** com carrinho de compras interativo
+- [ ] **Notificações Push** para lembretes de agendamento
+- [ ] **Calendário Semanal** na Agenda com visualização ampliada
+- [ ] **Modo Escuro** (Dark Mode)
+
+### 🎯 Planejado para Próximas Versões
+- [ ] **Relatórios Exportáveis** (CSV, PDF, Excel)
+- [ ] **Gráficos Avançados** (Linhas, Barras, Pizza, Funil)
+- [ ] **Envio de Lembretes** por email/SMS/WhatsApp
+- [ ] **Busca e Filtros Avançados** em todas as telas
+- [ ] **Perfil de Cliente** com histórico completo de atendimentos
+- [ ] **Sistema de Comissões** para barbeiros
+- [ ] **Programa de Fidelidade** para clientes
+- [ ] **Agendamento Online** - App para clientes finais
+- [ ] **Integração com Pagamento** (PIX, Cartão)
+- [ ] **Multi-idioma** (PT, EN, ES)
+- [ ] **Backup Automático** de dados
+- [ ] **Modo Offline** com sincronização
+
+### 💡 Ideias Futuras
+- [ ] **Reconhecimento Facial** para check-in
+- [ ] **Análise Preditiva** de horários de pico com IA
+- [ ] **Sugestões Personalizadas** de serviços baseadas em IA
+- [ ] **Integração com Redes Sociais** para marketing
+- [ ] **Gamificação** para engajamento de clientes
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Erro: "Row Level Security policy violation"
-- Verifique se o usuário está vinculado ao tenant na tabela `users`
-- Verifique se as políticas RLS foram criadas corretamente
+### ❌ Erro: "Row Level Security policy violation"
+**Causa**: O usuário não está vinculado corretamente ao tenant.
 
-### Erro: "Invalid JWT"
-- Reconecte no app (logout/login)
-- Verifique se as credenciais do Supabase estão corretas
+**Solução**:
+1. Verifique se o usuário existe na tabela `users`:
+```sql
+SELECT * FROM users WHERE email = 'seu@email.com';
+```
+2. Verifique se o `tenant_id` está correto
+3. Confirme que as políticas RLS foram criadas corretamente executando todo o `schema.sql`
 
-### Dados não aparecem
-- Verifique se o `tenant_id` do usuário está correto
-- Use o SQL Editor para verificar dados diretamente
-- Cheque os logs do console com `console.log()`
+---
+
+### ❌ Erro: "Invalid JWT" ou "Session expired"
+**Causa**: Token de autenticação expirado ou inválido.
+
+**Solução**:
+1. Faça logout e login novamente no app
+2. Verifique se as credenciais do Supabase em `lib/supabase.ts` estão corretas
+3. Limpe o cache do app e reinstale
+
+---
+
+### ❌ Dados não aparecem no Dashboard
+**Causa**: Sem dados no banco ou problema de sincronização.
+
+**Solução**:
+1. Verifique se o `tenant_id` do usuário está correto:
+```sql
+SELECT tenant_id FROM users WHERE id = auth.uid();
+```
+2. Execute queries diretamente no SQL Editor do Supabase para verificar dados
+3. Confira o console do navegador/app para erros JavaScript
+4. Use `Pull-to-Refresh` nas telas para forçar atualização
+
+---
+
+### ❌ Erro ao fazer build EAS: "Secret scanning detected"
+**Causa**: API keys expostas no código.
+
+**Solução**:
+1. Mova todas as chaves para variáveis de ambiente (`.env`)
+2. Configure secrets no EAS:
+```bash
+eas secret:create --scope project --name GROQ_API_KEY --value sua_chave
+```
+3. Reescreva o histórico do Git se necessário (veja seção anterior)
+
+---
+
+### ❌ App não conecta ao Supabase
+**Causa**: Credenciais incorretas ou problemas de rede.
+
+**Solução**:
+1. Verifique a URL e Anon Key em `lib/supabase.ts`
+2. Teste a conexão no SQL Editor do Supabase
+3. Verifique se o projeto Supabase está ativo
+4. Confirme que não há firewall bloqueando a conexão
+
+---
+
+### ❌ Assistente IA não responde
+**Causa**: Chave da API Groq não configurada ou inválida.
+
+**Solução**:
+1. Verifique se `GROQ_API_KEY` está no `.env`
+2. Confirme que a chave é válida em [console.groq.com](https://console.groq.com/)
+3. Verifique se há créditos disponíveis na conta Groq
+4. Confira o console para erros de API
+
+---
+
+## ❓ FAQ (Perguntas Frequentes)
+
+### **P: O SmartAgenda é gratuito?**
+**R**: Sim, o código-fonte é open-source sob licença MIT. Porém, você precisará de uma conta Supabase (gratuita até certo limite) e Groq (também gratuita) para rodar.
+
+### **P: Posso usar para múltiplas barbearias?**
+**R**: Sim! O sistema é multi-tenant. Cada barbearia é um tenant separado com isolamento total de dados.
+
+### **P: Funciona offline?**
+**R**: Atualmente não, mas está no roadmap. O app requer conexão com internet para sincronizar com o Supabase.
+
+### **P: Posso personalizar o design?**
+**R**: Sim! O código é totalmente aberto. Você pode modificar cores em `constants/colors.ts` e componentes conforme necessário.
+
+### **P: Como faço backup dos dados?**
+**R**: Os dados estão no Supabase. Você pode exportar via SQL Editor ou usar a API do Supabase para backups automáticos.
+
+### **P: Suporta quais formas de pagamento?**
+**R**: Atualmente registra vendas com múltiplos métodos (Dinheiro, Cartão, PIX, etc.). Integração com gateways de pagamento está planejada.
+
+### **P: Posso contribuir com o projeto?**
+**R**: Absolutamente! Pull requests são bem-vindos. Veja a seção [Contribuindo](#-contribuindo) abaixo.
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são muito bem-vindas! Para contribuir:
+
+1. **Fork** o repositório
+2. Crie uma **branch** para sua feature (`git checkout -b feature/MinhaFeature`)
+3. **Commit** suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. **Push** para a branch (`git push origin feature/MinhaFeature`)
+5. Abra um **Pull Request**
+
+### Diretrizes
+- Siga o estilo de código existente (TypeScript + ESLint)
+- Adicione testes quando aplicável
+- Documente novas funcionalidades
+- Mantenha commits atômicos e descritivos
+
+---
+
+## 📄 Licença
+
+Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
 ## 📞 Suporte
 
-Para dúvidas ou problemas:
-1. Verifique o arquivo `database/schema.sql` para entender o modelo de dados
-2. Consulte a [documentação do Supabase](https://supabase.com/docs)
-3. Consulte a [documentação do Expo](https://docs.expo.dev/)
+Precisa de ajuda? Aqui estão alguns recursos:
+
+- 📖 **Documentação**: Leia este README e os comentários no código
+- 🗄️ **Schema SQL**: Consulte `database/schema.sql` para entender o modelo de dados
+- 📚 **Documentação Supabase**: [supabase.com/docs](https://supabase.com/docs)
+- 📱 **Documentação Expo**: [docs.expo.dev](https://docs.expo.dev/)
+- 💬 **Issues**: Abra uma [issue no GitHub](../../issues) para reportar bugs ou sugerir features
 
 ---
 
-**Desenvolvido com ❤️ usando React Native, Expo e Supabase**
+## 🙏 Agradecimentos
+
+Este projeto foi construído com tecnologias incríveis:
+
+- [React Native](https://reactnative.dev/) - Framework mobile
+- [Expo](https://expo.dev/) - Plataforma de desenvolvimento
+- [Supabase](https://supabase.com/) - Backend as a Service
+- [TypeScript](https://www.typescriptlang.org/) - Tipagem estática
+- [TanStack Query](https://tanstack.com/query) - Gerenciamento de estado
+- [Lucide Icons](https://lucide.dev/) - Ícones modernos
+- [Groq](https://groq.com/) - API de IA ultrarrápida
+
+---
+
+<div align="center">
+
+**Desenvolvido com ❤️ para a comunidade de barbeiros**
+
+⭐ **Se este projeto foi útil, considere dar uma estrela!** ⭐
+
+[![GitHub stars](https://img.shields.io/github/stars/Smart-Agenda-Pro/SmartAgenda?style=social)](https://github.com/Smart-Agenda-Pro/SmartAgenda/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Smart-Agenda-Pro/SmartAgenda?style=social)](https://github.com/Smart-Agenda-Pro/SmartAgenda/network/members)
+
+---
+
+**© 2025 SmartAgenda | Transformando a gestão de barbearias** 💈
+
+</div>

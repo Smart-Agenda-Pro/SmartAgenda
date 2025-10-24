@@ -4,6 +4,8 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import ErrorBoundary from './components/ErrorBoundary';
+import { Alert } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -55,12 +57,49 @@ export default function RootLayout() {
     SplashScreen.hideAsync();
   }, []);
 
+  useEffect(() => {
+    // Install a global JS error handler to avoid immediate app crash on uncaught exceptions
+    // Keep a reference to the default handler so we can delegate after logging
+    // @ts-ignore
+    const defaultHandler = (ErrorUtils as any)?.getGlobalHandler?.();
+    // @ts-ignore
+    const globalHandler = (error: any, isFatal?: boolean) => {
+      try {
+        console.error('[GlobalError] Uncaught error', { error, isFatal });
+      } catch (e) {
+        // ignore
+      }
+      try {
+        Alert.alert('Erro', 'Ocorreu um erro inesperado. Por favor, reinicie o aplicativo.');
+      } catch (e) {
+        // ignore
+      }
+      if (defaultHandler) {
+        try { defaultHandler(error, isFatal); } catch (e) { /* ignore */ }
+      }
+    };
+    // @ts-ignore
+    if ((ErrorUtils as any)?.setGlobalHandler) {
+      // @ts-ignore
+      (ErrorUtils as any).setGlobalHandler(globalHandler);
+    }
+
+    return () => {
+      if ((ErrorUtils as any)?.setGlobalHandler && defaultHandler) {
+        // @ts-ignore
+        (ErrorUtils as any).setGlobalHandler(defaultHandler);
+      }
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <RootLayoutNav />
-        </GestureHandlerRootView>
+        <ErrorBoundary>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <RootLayoutNav />
+          </GestureHandlerRootView>
+        </ErrorBoundary>
       </AuthProvider>
     </QueryClientProvider>
   );

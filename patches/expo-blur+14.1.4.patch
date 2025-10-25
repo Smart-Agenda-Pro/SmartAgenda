@@ -1,0 +1,446 @@
+diff --git a/node_modules/expo-blur/CHANGELOG.md b/node_modules/expo-blur/CHANGELOG.md
+index 5b1ea5b..21856e3 100644
+--- a/node_modules/expo-blur/CHANGELOG.md
++++ b/node_modules/expo-blur/CHANGELOG.md
+@@ -10,10 +10,6 @@
+ 
+ ### 💡 Others
+ 
+-## 14.1.5 — 2025-06-05
+-
+-_This version does not introduce any user-facing changes._
+-
+ ## 14.1.4 — 2025-04-30
+ 
+ _This version does not introduce any user-facing changes._
+diff --git a/node_modules/expo-blur/android/build.gradle b/node_modules/expo-blur/android/build.gradle
+index 0fb076a..9e3046b 100644
+--- a/node_modules/expo-blur/android/build.gradle
++++ b/node_modules/expo-blur/android/build.gradle
+@@ -1,19 +1,24 @@
+ plugins {
+   id 'com.android.library'
+-  id 'expo-module-gradle-plugin'
++  // id 'expo-module-gradle-plugin'
+ }
+ 
+ group = 'host.exp.exponent'
+-version = '14.1.5'
++version = '14.1.4'
+ 
+ android {
+   namespace "expo.modules.blur"
+   defaultConfig {
+     versionCode 1
+-    versionName "14.1.5"
++    versionName "14.1.4"
+   }
+ }
+ 
+ dependencies {
+   implementation 'com.github.Dimezis:BlurView:version-2.0.6'
+ }
++
++// Apply Expo Module Core Plugin manually
++def expoModulesCorePlugin = new File(project.rootProject.file("../node_modules/expo-modules-core/android/ExpoModulesCorePlugin.gradle"))
++apply from: expoModulesCorePlugin
++applyKotlinExpoModulesCorePlugin()
+diff --git a/node_modules/expo-blur/android/build.gradle.bak b/node_modules/expo-blur/android/build.gradle.bak
+new file mode 100644
+index 0000000..0fb076a
+--- /dev/null
++++ b/node_modules/expo-blur/android/build.gradle.bak
+@@ -0,0 +1,19 @@
++plugins {
++  id 'com.android.library'
++  id 'expo-module-gradle-plugin'
++}
++
++group = 'host.exp.exponent'
++version = '14.1.5'
++
++android {
++  namespace "expo.modules.blur"
++  defaultConfig {
++    versionCode 1
++    versionName "14.1.5"
++  }
++}
++
++dependencies {
++  implementation 'com.github.Dimezis:BlurView:version-2.0.6'
++}
+diff --git a/node_modules/expo-blur/expo-module.config.json b/node_modules/expo-blur/expo-module.config.json
+index 38d5285..7b2c546 100644
+--- a/node_modules/expo-blur/expo-module.config.json
++++ b/node_modules/expo-blur/expo-module.config.json
+@@ -8,7 +8,7 @@
+     "publication": {
+       "groupId": "host.exp.exponent",
+       "artifactId": "expo.modules.blur",
+-      "version": "14.1.5",
++      "version": "14.1.4",
+       "repository": "local-maven-repo"
+     }
+   }
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar
+similarity index 100%
+rename from node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar
+rename to node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.md5
+similarity index 100%
+rename from node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.md5
+rename to node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.md5
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.sha1
+similarity index 100%
+rename from node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.sha1
+rename to node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.sha1
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.sha256
+similarity index 100%
+rename from node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.sha256
+rename to node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.sha256
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.sha512
+similarity index 100%
+rename from node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5-sources.jar.sha512
+rename to node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4-sources.jar.sha512
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar
+new file mode 100644
+index 0000000..0b4e997
+Binary files /dev/null and b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar differ
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.md5
+new file mode 100644
+index 0000000..8ce8128
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.md5
+@@ -0,0 +1 @@
++784e7f5e9ad830b3df3772da03656273
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha1
+new file mode 100644
+index 0000000..026bbf7
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha1
+@@ -0,0 +1 @@
++c6b3ef75951511556b734511e33cd55384dd4b4f
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha256
+new file mode 100644
+index 0000000..b17b4dd
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha256
+@@ -0,0 +1 @@
++b6f2ac0d4dd262bb734a499ce6aa1c5270a47cede28ee09b31a42f52a686f241
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha512
+new file mode 100644
+index 0000000..70df27a
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.aar.sha512
+@@ -0,0 +1 @@
++50cc967146ec04d78ba81abde6e394701eb360377b55dc8339950fcd35a2ce38717bdb998328550c6d309944f834e63f676d9f8f215d347aab8da942eab53faf
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module
+similarity index 64%
+rename from node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module
+rename to node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module
+index f54fd18..9a37719 100644
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module
+@@ -3,7 +3,7 @@
+   "component": {
+     "group": "host.exp.exponent",
+     "module": "expo.modules.blur",
+-    "version": "14.1.5",
++    "version": "14.1.4",
+     "attributes": {
+       "org.gradle.status": "release"
+     }
+@@ -24,13 +24,13 @@
+       },
+       "files": [
+         {
+-          "name": "expo.modules.blur-14.1.5.aar",
+-          "url": "expo.modules.blur-14.1.5.aar",
+-          "size": 22423,
+-          "sha512": "5e4aeb11e4238962fc7fc1b5f0564f9008216a8f63e67f5d673c8fd658e4cbe0ed4ef07cafc72f380244f7821b5cfaa3f90002186461b4a8af6a9739bc3d8e90",
+-          "sha256": "c825140356a6db373295133e7ce31e5de48a418aa43f094d9738b54dcb8707fe",
+-          "sha1": "425896d5ade9f541ff6e32f9955eb1eef52ccb07",
+-          "md5": "83cc75af80765ba51e011527d9c7d8cb"
++          "name": "expo.modules.blur-14.1.4.aar",
++          "url": "expo.modules.blur-14.1.4.aar",
++          "size": 22373,
++          "sha512": "50cc967146ec04d78ba81abde6e394701eb360377b55dc8339950fcd35a2ce38717bdb998328550c6d309944f834e63f676d9f8f215d347aab8da942eab53faf",
++          "sha256": "b6f2ac0d4dd262bb734a499ce6aa1c5270a47cede28ee09b31a42f52a686f241",
++          "sha1": "c6b3ef75951511556b734511e33cd55384dd4b4f",
++          "md5": "784e7f5e9ad830b3df3772da03656273"
+         }
+       ]
+     },
+@@ -60,13 +60,13 @@
+       ],
+       "files": [
+         {
+-          "name": "expo.modules.blur-14.1.5.aar",
+-          "url": "expo.modules.blur-14.1.5.aar",
+-          "size": 22423,
+-          "sha512": "5e4aeb11e4238962fc7fc1b5f0564f9008216a8f63e67f5d673c8fd658e4cbe0ed4ef07cafc72f380244f7821b5cfaa3f90002186461b4a8af6a9739bc3d8e90",
+-          "sha256": "c825140356a6db373295133e7ce31e5de48a418aa43f094d9738b54dcb8707fe",
+-          "sha1": "425896d5ade9f541ff6e32f9955eb1eef52ccb07",
+-          "md5": "83cc75af80765ba51e011527d9c7d8cb"
++          "name": "expo.modules.blur-14.1.4.aar",
++          "url": "expo.modules.blur-14.1.4.aar",
++          "size": 22373,
++          "sha512": "50cc967146ec04d78ba81abde6e394701eb360377b55dc8339950fcd35a2ce38717bdb998328550c6d309944f834e63f676d9f8f215d347aab8da942eab53faf",
++          "sha256": "b6f2ac0d4dd262bb734a499ce6aa1c5270a47cede28ee09b31a42f52a686f241",
++          "sha1": "c6b3ef75951511556b734511e33cd55384dd4b4f",
++          "md5": "784e7f5e9ad830b3df3772da03656273"
+         }
+       ]
+     },
+@@ -80,8 +80,8 @@
+       },
+       "files": [
+         {
+-          "name": "expo.modules.blur-14.1.5-sources.jar",
+-          "url": "expo.modules.blur-14.1.5-sources.jar",
++          "name": "expo.modules.blur-14.1.4-sources.jar",
++          "url": "expo.modules.blur-14.1.4-sources.jar",
+           "size": 4177,
+           "sha512": "c14ec45b8deedb1ddad16ce4c6b2e317b6b244b9e26e305de0ba3aabf597acd3de7c0c876451f4e685012a4c1034d6c37eec8b1d67dc858815407fad2df14e4b",
+           "sha256": "5cd957500400c65a755d64937fa13fe96dc2301caad81a3f47f77f6e0c8642f9",
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.md5
+new file mode 100644
+index 0000000..fcaee55
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.md5
+@@ -0,0 +1 @@
++a983333047224d85274a5ada5fb778d1
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha1
+new file mode 100644
+index 0000000..72d4b8c
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha1
+@@ -0,0 +1 @@
++bd3f032afc591d25f82167bb8dafcdeb08d133b5
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha256
+new file mode 100644
+index 0000000..ca548b1
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha256
+@@ -0,0 +1 @@
++24acd512bbed35dc9b60fd2764336170a5433c097551efd8787ff85336de6eb1
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha512
+new file mode 100644
+index 0000000..d4c0f21
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.module.sha512
+@@ -0,0 +1 @@
++bde243cf5b86399d0dd4df8c81edaa6ee0cb8eef023beba03ce7e232da118d939b774b685eaf49be1b7a75ffba32d43ff5db896a17cdd6c62d0c0e0dafa1451b
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom
+similarity index 98%
+rename from node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom
+rename to node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom
+index c2a8d12..15002b0 100644
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom
+@@ -9,7 +9,7 @@
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>host.exp.exponent</groupId>
+   <artifactId>expo.modules.blur</artifactId>
+-  <version>14.1.5</version>
++  <version>14.1.4</version>
+   <packaging>aar</packaging>
+   <name>expo.modules.blur</name>
+   <url>https://github.com/expo/expo</url>
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.md5
+new file mode 100644
+index 0000000..f8ab302
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.md5
+@@ -0,0 +1 @@
++d2363dee6aec816a72cdb23c8741c8ec
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha1
+new file mode 100644
+index 0000000..e179af6
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha1
+@@ -0,0 +1 @@
++c23556aaff0e4ec5302242572f22b0074b03c515
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha256
+new file mode 100644
+index 0000000..02e0dfb
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha256
+@@ -0,0 +1 @@
++28858005ea64e9d68c145f691ccf108c67423a99affa95b71d48094d014d78f1
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha512
+new file mode 100644
+index 0000000..8ee91fb
+--- /dev/null
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.4/expo.modules.blur-14.1.4.pom.sha512
+@@ -0,0 +1 @@
++9518a7c4953be5dee5f37172519badab333f595c71892e00aacf9c7746c1f72129e7c8765a5852cf92224bf63ed02513c135bd553882f40dcc5fe173bf19ae17
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar
+deleted file mode 100644
+index babbea4..0000000
+Binary files a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar and /dev/null differ
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.md5
+deleted file mode 100644
+index 7a4c7ce..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.md5
++++ /dev/null
+@@ -1 +0,0 @@
+-83cc75af80765ba51e011527d9c7d8cb
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha1
+deleted file mode 100644
+index 2793ff4..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha1
++++ /dev/null
+@@ -1 +0,0 @@
+-425896d5ade9f541ff6e32f9955eb1eef52ccb07
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha256
+deleted file mode 100644
+index c4d27d6..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha256
++++ /dev/null
+@@ -1 +0,0 @@
+-c825140356a6db373295133e7ce31e5de48a418aa43f094d9738b54dcb8707fe
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha512
+deleted file mode 100644
+index b5ddf1c..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.aar.sha512
++++ /dev/null
+@@ -1 +0,0 @@
+-5e4aeb11e4238962fc7fc1b5f0564f9008216a8f63e67f5d673c8fd658e4cbe0ed4ef07cafc72f380244f7821b5cfaa3f90002186461b4a8af6a9739bc3d8e90
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.md5
+deleted file mode 100644
+index 05312c9..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.md5
++++ /dev/null
+@@ -1 +0,0 @@
+-e3ef3823cf00b2f3faa76a39c5204950
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha1
+deleted file mode 100644
+index 1c0b6c4..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha1
++++ /dev/null
+@@ -1 +0,0 @@
+-f942ec016f472be53ae48b78924016bbe41455f5
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha256
+deleted file mode 100644
+index f480311..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha256
++++ /dev/null
+@@ -1 +0,0 @@
+-b4d1734feb49c8b6f09e00bae675fb2f486935a304304707ead38232a675d2b1
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha512
+deleted file mode 100644
+index 01921cf..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.module.sha512
++++ /dev/null
+@@ -1 +0,0 @@
+-46b11ef9ef623b63ce9effa490110d5dc3d41503255589a4847db503c8e91d2d17855afd0a9766920042ab3d92a194ce6474062a5f68c46f812e0254d1db93df
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.md5
+deleted file mode 100644
+index 9eac80d..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.md5
++++ /dev/null
+@@ -1 +0,0 @@
+-ee9bc9d670ab625340385e2a7ba1980c
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha1
+deleted file mode 100644
+index 72cfc47..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha1
++++ /dev/null
+@@ -1 +0,0 @@
+-61480ecdfb2108b5120e725a039c45620db50246
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha256
+deleted file mode 100644
+index 66693da..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha256
++++ /dev/null
+@@ -1 +0,0 @@
+-2d50bea9a64adc62d26fa19545e95ddf6ed0ca91cffdd7cdacb6b269246cbc79
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha512
+deleted file mode 100644
+index 260defc..0000000
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/14.1.5/expo.modules.blur-14.1.5.pom.sha512
++++ /dev/null
+@@ -1 +0,0 @@
+-1695deb8cc33272cfddb1a4f7a8ce81de68229719d41c7ee3f39cf2ccb6ad0261754bfab77221f93fc1a86b767912f57bb4082b00227b52083cdb4a71a777daf
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml
+index f79069c..eeb4487 100644
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml
+@@ -3,11 +3,11 @@
+   <groupId>host.exp.exponent</groupId>
+   <artifactId>expo.modules.blur</artifactId>
+   <versioning>
+-    <latest>14.1.5</latest>
+-    <release>14.1.5</release>
++    <latest>14.1.4</latest>
++    <release>14.1.4</release>
+     <versions>
+-      <version>14.1.5</version>
++      <version>14.1.4</version>
+     </versions>
+-    <lastUpdated>20250605000054</lastUpdated>
++    <lastUpdated>20250430211459</lastUpdated>
+   </versioning>
+ </metadata>
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.md5 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.md5
+index 3aae7ed..fecc9cc 100644
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.md5
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.md5
+@@ -1 +1 @@
+-a86077aefd954b30c0ef165ceca78586
+\ No newline at end of file
++c2d29acbfe47d31f2e72be512fc03e8e
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha1 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha1
+index 099c61f..c553446 100644
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha1
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha1
+@@ -1 +1 @@
+-a9c0e874b4cb8f193459369cee6218f481a9c076
+\ No newline at end of file
++dbe4f2bb3b563d62e5e84aca0899552ea8e28632
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha256 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha256
+index bb4f177..fda33ae 100644
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha256
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha256
+@@ -1 +1 @@
+-7e8cbc07755891c04d6ab41f3dc2d587b53c4e25451684f3e1dd6e500a30cd67
+\ No newline at end of file
++4ffc33101aa8a2b7295b83fca6bb893a07f07d6d87315ae9f533d03d44e0ce64
+\ No newline at end of file
+diff --git a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha512 b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha512
+index a24c16c..8390ca5 100644
+--- a/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha512
++++ b/node_modules/expo-blur/local-maven-repo/host/exp/exponent/expo.modules.blur/maven-metadata.xml.sha512
+@@ -1 +1 @@
+-a37e734c295ed146489864100bcc856f3e7a6700eb88d4a53f4321c3cab30b84bafaea84ef4986db12d98269d4b7877091125ec6694773f7c32a65e61a725d32
+\ No newline at end of file
++a63c6c44e70592fc60e2fb2df29dc353a0b8088a4a29b6e12061a04d59027d2544609baeb6394d1defd9ad50b5f56dfa7b90b331255ccbcf99d63c7717617c98
+\ No newline at end of file

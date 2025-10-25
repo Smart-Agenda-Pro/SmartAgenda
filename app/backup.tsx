@@ -43,7 +43,8 @@ import {
   Package,
   FileArchive,
 } from 'lucide-react-native';
-import * as DocumentPicker from 'expo-document-picker';
+// `expo-document-picker` é importado dinamicamente dentro de `handleRestore`
+// para evitar inicialização do módulo nativo durante o boot do app.
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { format } from 'date-fns';
@@ -346,16 +347,21 @@ export default function BackupScreen() {
         };
         input.click();
       } else {
-        const result = await DocumentPicker.getDocumentAsync({
-          type: 'application/json',
-          copyToCacheDirectory: true,
-        });
+          // importar o módulo sob demanda para evitar crash de inicialização
+          // quando houver mismatch binário entre módulos nativos.
+          const docPickerModule = (await import('expo-document-picker')) as any;
+          const { getDocumentAsync } = docPickerModule;
 
-        if (result.canceled) {
-          return;
-        }
+          const result = await getDocumentAsync({
+            type: 'application/json',
+            copyToCacheDirectory: true,
+          });
 
-        const fileUri = result.assets[0].uri;
+          if (result?.canceled) {
+            return;
+          }
+
+          const fileUri = result?.assets?.[0]?.uri;
         const fileContent = await FileSystem.readAsStringAsync(fileUri);
         const backupData: BackupData = JSON.parse(fileContent);
 

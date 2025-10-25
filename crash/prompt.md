@@ -1,0 +1,1 @@
+Quando fui gerar um APK la no Expo, e ao baixar ele no mbile, ao abrir o app, ele abre e depois fecha sozinho (crash), utilizei o adb para verificar qual erro ao abrir o app e captar os log com base nos arquivos do diretorio crash, melhore o projeto do app

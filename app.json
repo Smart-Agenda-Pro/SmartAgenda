@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BarberPro Management",
-    "slug": "barberpro-management",
+    "name": "Smart Agenda",
+    "slug": "smart-agenda",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

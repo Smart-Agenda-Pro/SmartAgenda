@@ -837,7 +837,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   statLabel: {
-    fontSize: 12,
+    fontSize: 10,
     color: colors.textSecondary,
   },
   exportButtons: {

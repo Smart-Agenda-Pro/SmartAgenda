@@ -418,6 +418,7 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 10,
+    flexShrink: 1,
     color: colors.textSecondary,
     marginTop: 2,
   },

@@ -1132,6 +1132,7 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 14,
+    flexShrink: 1,
     color: colors.textSecondary,
     fontWeight: '500' as const,
   },
@@ -1494,6 +1495,7 @@ const styles = StyleSheet.create({
   },
   detailsStatLabel: {
     fontSize: 12,
+    flexShrink: 1,
     color: colors.textSecondary,
   },
   detailsNotes: {

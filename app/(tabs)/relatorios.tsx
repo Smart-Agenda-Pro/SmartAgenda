@@ -837,6 +837,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   statLabel: {
+    flexShrink: 1,
     fontSize: 10,
     color: colors.textSecondary,
   },

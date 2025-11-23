@@ -426,8 +426,10 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 10,
-    flexShrink: 1,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
+    textAlign: 'center',
+    includeFontPadding: false, // reduz padding extra no Android
     marginTop: 2,
   },
   statDivider: {

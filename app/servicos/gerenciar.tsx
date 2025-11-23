@@ -1064,8 +1064,9 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 14,
-    flexShrink: 1,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
+    includeFontPadding: false // reduz padding extra no Android
     fontWeight: '500' as const,
   },
   statLabelLight: {
@@ -1234,8 +1235,10 @@ const styles = StyleSheet.create({
   },
   servicoStatLabel: {
     fontSize: 11,
-    flexShrink: 1,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
+    textAlign: 'center',
+    includeFontPadding: false // reduz padding extra no Android
   },
   statDivider: {
     width: 1,
@@ -1443,8 +1446,10 @@ const styles = StyleSheet.create({
   },
   detailsStatLabel: {
     fontSize: 12,
-    flexShrink: 1,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
+    textAlign: 'center',
+    includeFontPadding: false // reduz padding extra no Android
   },
   detailsActions: {
     flexDirection: 'row',

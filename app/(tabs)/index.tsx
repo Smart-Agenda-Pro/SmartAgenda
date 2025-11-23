@@ -1171,8 +1171,10 @@ const styles = StyleSheet.create({
   },
   agendaSummaryLabel: {
     fontSize: 13,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
     textAlign: 'center',
+    includeFontPadding: false // reduz padding extra no Android
   },
   agendaButton: {
     backgroundColor: colors.primary,

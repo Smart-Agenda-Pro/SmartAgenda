@@ -1305,7 +1305,10 @@ const styles = StyleSheet.create({
   },
   clienteStatLabel: {
     fontSize: 11,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
+    textAlign: 'center',
+    includeFontPadding: false // reduz padding extra no Android
   },
   statDivider: {
     width: 1,
@@ -1495,8 +1498,10 @@ const styles = StyleSheet.create({
   },
   detailsStatLabel: {
     fontSize: 12,
-    flexShrink: 1,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
+    textAlign: 'center',
+    includeFontPadding: false // reduz padding extra no Android
   },
   detailsNotes: {
     fontSize: 14,

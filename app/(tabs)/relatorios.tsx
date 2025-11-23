@@ -837,9 +837,11 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   statLabel: {
-    flexShrink: 1,
     fontSize: 10,
+    lineHeight: 14,           // >= fontSize
     color: colors.textSecondary,
+    textAlign: 'center',
+    includeFontPadding: false // reduz padding extra no Android
   },
   exportButtons: {
     flexDirection: 'row',
